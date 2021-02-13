@@ -1,17 +1,17 @@
 const int HYUNDAI_COMMUNITY_MAX_STEER = 409;             // like stock
 const int HYUNDAI_COMMUNITY_MAX_RT_DELTA = 200;          // max delta torque allowed for real time checks
 const uint32_t HYUNDAI_COMMUNITY_RT_INTERVAL = 250000;   // 250ms between real time checks
-const int HYUNDAI_COMMUNITY_MAX_RATE_UP = 4;
-const int HYUNDAI_COMMUNITY_MAX_RATE_DOWN = 7;
+const int HYUNDAI_COMMUNITY_MAX_RATE_UP =5;
+const int HYUNDAI_COMMUNITY_MAX_RATE_DOWN = 15;
 const int HYUNDAI_COMMUNITY_DRIVER_TORQUE_ALLOWANCE = 50;
 const int HYUNDAI_COMMUNITY_DRIVER_TORQUE_FACTOR = 2;
 const int HYUNDAI_COMMUNITY_STANDSTILL_THRSLD = 30;  // ~1kph
 
-const int HYUNDAI_COMMUNITY_MAX_ACCEL = 150;        // 1.5 m/s2
-const int HYUNDAI_COMMUNITY_MIN_ACCEL = -300;       // -3.0 m/s2
+const int HYUNDAI_COMMUNITY_MAX_ACCEL = 400;        // 4.0 m/s2
+const int HYUNDAI_COMMUNITY_MIN_ACCEL = -500;       // -5.0 m/s2
 
-const int HYUNDAI_COMMUNITY_ISO_MAX_ACCEL = 200;        // 2.0 m/s2
-const int HYUNDAI_COMMUNITY_ISO_MIN_ACCEL = -350;       // -3.5 m/s2
+const int HYUNDAI_COMMUNITY_ISO_MAX_ACCEL = 400;        // 4.0 m/s2
+const int HYUNDAI_COMMUNITY_ISO_MIN_ACCEL = -500;       // -5.0 m/s2
 
 bool hyundai_community_non_scc_car = false;
 bool aeb_cmd_act = false;
@@ -179,7 +179,7 @@ static int hyundai_community_rx_hook(CAN_FIFOMailBox_TypeDef *to_push) {
       brake_pressed = (GET_BYTE(to_push, 6) >> 7) != 0;
     }
 
-    generic_rx_checks((addr == 832));
+    
   }
     // monitor AEB active command to bypass panda accel safety, don't block AEB
   if ((addr == 1057) && (bus == 2) && (hyundai_community_non_scc_car)){
