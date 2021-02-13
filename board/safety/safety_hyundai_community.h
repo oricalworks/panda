@@ -1,9 +1,9 @@
 
-const int HYUNDAI_COMMUNITY_MAX_ACCEL = 150;        // 1.5 m/s2
-const int HYUNDAI_COMMUNITY_MIN_ACCEL = -300;       // -3.0 m/s2
+const int HYUNDAI_COMMUNITY_MAX_ACCEL = 400;        // 4.0 m/s2
+const int HYUNDAI_COMMUNITY_MIN_ACCEL = -500;       // -5.0 m/s2
 
-const int HYUNDAI_COMMUNITY_ISO_MAX_ACCEL = 200;        // 2.0 m/s2
-const int HYUNDAI_COMMUNITY_ISO_MIN_ACCEL = -350;       // -3.5 m/s2
+const int HYUNDAI_COMMUNITY_ISO_MAX_ACCEL = 400;        // 4.0 m/s2
+const int HYUNDAI_COMMUNITY_ISO_MIN_ACCEL = -500;       // -5.0 m/s2
 
 bool hyundai_community_non_scc_car = false;
 bool aeb_cmd_act = false;
@@ -155,11 +155,11 @@ static int hyundai_community_rx_hook(CAN_FIFOMailBox_TypeDef *to_push) {
     }
 
     if (addr == 916) {
-      gas_pressed = ((GET_BYTE(to_push, 5) >> 5) & 0x3) == 1;
+      #gas_pressed = ((GET_BYTE(to_push, 5) >> 5) & 0x3) == 1;
       brake_pressed = (GET_BYTE(to_push, 6) >> 7) != 0;
     }
 
-    generic_rx_checks((addr == 832));
+    #generic_rx_checks((addr == 832));
   }
     // monitor AEB active command to bypass panda accel safety, don't block AEB
   if ((addr == 1057) && (bus == 2) && (hyundai_community_non_scc_car)){
